@@ -34,6 +34,7 @@ public class DrawPanel extends JComponent implements MouseListener, MouseInputLi
 	ArrayList<ColoredPoint> pointList;
 	Color currentColor;
 	Stroke stroke;
+	Cursor cursor;
 	/**
 	 * Create the panel.
 	 */
@@ -89,7 +90,7 @@ public class DrawPanel extends JComponent implements MouseListener, MouseInputLi
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		this.isUsable = false;		
+		this.isUsable = false;
 		//this.currentColor = Color.white;
 	}
 
@@ -111,6 +112,19 @@ public class DrawPanel extends JComponent implements MouseListener, MouseInputLi
 	private void addPointToList(Color color, Point point){
 		this.pointList.add(new ColoredPoint(point, color));
 		}
+	
+	public void setColor (Color color ){
+		currentColor = color;
+	}
+	
+	public void setStroke (float width){
+		stroke = new BasicStroke(width);
+	}
+	
+	public void refreshPanel (){
+		
+		
+	}
 	
 	
 }

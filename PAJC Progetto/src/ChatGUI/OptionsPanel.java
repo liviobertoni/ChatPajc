@@ -6,6 +6,8 @@ import java.awt.Image;
 
 import javax.swing.JRadioButton;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -19,6 +21,9 @@ import javax.swing.JComponent;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class OptionsPanel extends JComponent {
 	
@@ -28,15 +33,18 @@ public class OptionsPanel extends JComponent {
 	JSlider sliderStroke;
 	JComboBox comboBox;
 	JRadioButton radioSegmento;
+	Color selectedColor;
+	private JButton btnRefresh;
+	
 	/**
 	 * Create the panel.
 	 */
 	public OptionsPanel() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0};
+		gridBagLayout.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
 		
@@ -60,6 +68,7 @@ public class OptionsPanel extends JComponent {
 			public void stateChanged(ChangeEvent e) {
 				radioGomma.setSelected(false);
 				radioSegmento.setSelected(false);
+				selectedColor = Color.black;
 			}
 		});
 		GridBagConstraints gbc_radioPenna = new GridBagConstraints();
@@ -71,14 +80,15 @@ public class OptionsPanel extends JComponent {
 		
 
 		radioGomma = new JRadioButton("Gomma");
-		Toolkit toolKit = Toolkit.getDefaultToolkit();
-		Image image = toolKit.getImage("/Users/Livio/Documents/workspace_mars/PAJC Progetto/Risorse/gomma.png");
-		image.getScaledInstance(1, 1, 1);
-		Cursor c = toolKit.createCustomCursor(image, new Point(), "Gomma");
+//		Toolkit toolKit = Toolkit.getDefaultToolkit();
+//		Image image = toolKit.getImage("/Users/Livio/Documents/workspace_mars/PAJC Progetto/Risorse/gomma.png");
+//		image.getScaledInstance(1, 1, 1);
+//		Cursor c = toolKit.createCustomCursor(image, new Point(), "Gomma");
 		radioGomma.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				radioPenna.setSelected(false);
 				radioSegmento.setSelected(false);
+				selectedColor = Color.white;
 			}
 		});
 		GridBagConstraints gbc_radioGomma = new GridBagConstraints();
@@ -97,7 +107,7 @@ public class OptionsPanel extends JComponent {
 		});
 		GridBagConstraints gbc_radioSegmento = new GridBagConstraints();
 		gbc_radioSegmento.anchor = GridBagConstraints.WEST;
-		gbc_radioSegmento.insets = new Insets(0, 0, 0, 5);
+		gbc_radioSegmento.insets = new Insets(0, 0, 5, 5);
 		gbc_radioSegmento.gridx = 1;
 		gbc_radioSegmento.gridy = 3;
 		add(radioSegmento, gbc_radioSegmento);
@@ -108,6 +118,16 @@ public class OptionsPanel extends JComponent {
 		gbc_sliderStroke.gridx = 5;
 		gbc_sliderStroke.gridy = 2;
 		add(sliderStroke, gbc_sliderStroke);
+		sliderStroke.setMinimum(1);
+		sliderStroke.setMaximum(50);
+		
+		sliderStroke.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				
+			}
+		});
+		
+		
 		
 		comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -121,19 +141,31 @@ public class OptionsPanel extends JComponent {
 		
 		JLabel lblIndirizzoIp = new JLabel("Indirizzo IP:");
 		GridBagConstraints gbc_lblIndirizzoIp = new GridBagConstraints();
-		gbc_lblIndirizzoIp.insets = new Insets(0, 0, 0, 5);
+		gbc_lblIndirizzoIp.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIndirizzoIp.gridx = 5;
 		gbc_lblIndirizzoIp.gridy = 3;
 		add(lblIndirizzoIp, gbc_lblIndirizzoIp);
 		
 		textIP = new JTextField();
 		GridBagConstraints gbc_textIP = new GridBagConstraints();
-		gbc_textIP.insets = new Insets(0, 0, 0, 5);
+		gbc_textIP.insets = new Insets(0, 0, 5, 5);
 		gbc_textIP.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textIP.gridx = 7;
 		gbc_textIP.gridy = 3;
 		add(textIP, gbc_textIP);
 		textIP.setColumns(10);
+		
+		btnRefresh = new JButton("Pulisci Schermata");
+		btnRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		GridBagConstraints gbc_btnRefresh = new GridBagConstraints();
+		gbc_btnRefresh.insets = new Insets(0, 0, 0, 5);
+		gbc_btnRefresh.gridx = 1;
+		gbc_btnRefresh.gridy = 5;
+		add(btnRefresh, gbc_btnRefresh);
 
 	}
 

@@ -22,6 +22,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeListener;
+import javax.swing.plaf.SliderUI;
 import javax.swing.event.ChangeEvent;
 import javax.swing.JTextField;
 import javax.swing.JPopupMenu;
@@ -98,6 +99,8 @@ public class MainForm {
 		gbc_lblChatArea.gridy = 0;
 		frame.getContentPane().add(lblChatArea, gbc_lblChatArea);
 		DrawPanel drawPanel = new DrawPanel();
+		
+		
 		GridBagConstraints gbc_drawPanel = new GridBagConstraints();
 		gbc_drawPanel.fill = GridBagConstraints.BOTH;
 		gbc_drawPanel.insets = new Insets(0, 0, 5, 5);
@@ -122,7 +125,31 @@ public class MainForm {
 		frame.getContentPane().add(optionsPanel, gbc_optionsPanel);
 		
 		
+		optionsPanel.sliderStroke.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				drawPanel.setStroke(optionsPanel.sliderStroke.getValue());
+			}
+		});
 		
+		
+		optionsPanel.radioPenna.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				drawPanel.setColor(optionsPanel.selectedColor);
+				drawPanel.setStroke(4);
+			}
+		});
+		optionsPanel.radioGomma.addChangeListener(new ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				drawPanel.setColor(optionsPanel.selectedColor);
+				drawPanel.setStroke(14);
+			}
+		});
 		
 		
 		
